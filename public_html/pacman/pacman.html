@@ -80,14 +80,40 @@ and open the template in the editor.
             }
             document.getElementById("pacman").innerHTML = fila;
         }
+        function aleatorio(min, max){
+            return Math.floor(Math.random() * ((max + 1) - min) + min);
+        }
         
         //variables para el jugador
         var datosJug = ["X", "Y", "Direc", "anarDirec"];
         var jug = [datosJug];
-        //variables para los fantasmas
-        var datos = ["X", "Y", "Direc"];
-        var fant = [datos, datos, datos];
+        
+        var fantasmas = new Array(3);
+        for(var i = 0; i < fantasmas.length ; i++){
+            fantasmas[i] = new Array(3);
+        }
+        
+        //ubicacion random fantasmas
+        
+        function aleatori(){
+            
+            for(var i = 0; i < fantasmas.length; i++){
+                
+                do{
+                    var num = aleatorio(0, 29);
+                    var num2 = aleatorio(0, 29);
+                }while(tablero[num][num2] != 1);
+                    var num3 = aleatorio(0, 3);
+                fantasmas[i][0] = num;
+                fantasmas[i][1] = num2;
+                fantasmas[i][2] = num3;
+            }
+            
+            
+        }
+        
         imprimir();
         consola();
+        aleatori();
     </script>
 </html>
