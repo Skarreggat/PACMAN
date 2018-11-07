@@ -12,7 +12,7 @@ and open the template in the editor.
 
     </head>
     <body>
-        <div id="pacman" style="font-family: Courier New; font-size: 20px; font-weight: bold; line-height: 15px;"></div>
+        <div id="pacman" style="font-family: Courier New; font-size: 25px; font-weight: bold; line-height: 17px;"></div>
     </body>
     <script>
 
@@ -57,8 +57,12 @@ and open the template in the editor.
                 for (var y = 0; y < tablero[x].length; y++) {
                     if (tablero[x][y] === 0) {
                         fila += "X";
-                    } else {
+                    } else if (tablero[x][y] === 1) {
                         fila += " ";
+                    } else if (tablero[x][y] === "F") {
+                        fila += "F";
+                    } else {
+                        fila += "@";
                     }
                 }
             }
@@ -73,47 +77,123 @@ and open the template in the editor.
                 for (var y = 0; y < tablero[x].length; y++) {
                     if (tablero[x][y] === 0) {
                         fila += "X";
-                    } else {
+                    } else if (tablero[x][y] === 1) {
                         fila += "&nbsp;";
+                    } else if (tablero[x][y] === "F") {
+                        fila += "<span style='color:red;'>F</span>";
+                    } else {
+                        fila += "<span style='color:darkblue;'>@</span>";
                     }
                 }
             }
             document.getElementById("pacman").innerHTML = fila;
         }
-        function aleatorio(min, max){
+        function aleatorio(min, max) {
             return Math.floor(Math.random() * ((max + 1) - min) + min);
         }
-        
+
         //variables para el jugador
-        var datosJug = ["X", "Y", "Direc", "anarDirec"];
-        var jug = [datosJug];
-        
+        /*var datosJug = ["X", "Y", "Direc", "anarDirec"];
+         var jug = [datosJug];*/
+
+        var jugador = new Array(4);
+
         var fantasmas = new Array(3);
-        for(var i = 0; i < fantasmas.length ; i++){
+        for (var i = 0; i < fantasmas.length; i++) {
             fantasmas[i] = new Array(3);
         }
-        
-        //ubicacion random fantasmas
-        
-        function aleatori(){
-            
-            for(var i = 0; i < fantasmas.length; i++){
-                
-                do{
+
+        //ubicacion random fantasmas y jugador
+
+        function fAleatori() {
+
+            for (var i = 0; i < fantasmas.length; i++) {
+
+                do {
                     var num = aleatorio(0, 29);
                     var num2 = aleatorio(0, 29);
-                }while(tablero[num][num2] != 1);
-                    var num3 = aleatorio(0, 3);
+                } while (tablero[num][num2] != 1);
+                tablero[num][num2] = "F";
                 fantasmas[i][0] = num;
                 fantasmas[i][1] = num2;
-                fantasmas[i][2] = num3;
             }
-            
-            
         }
-        
-        imprimir();
+        function jAleatori() {
+            do {
+                var num = aleatorio(0, 29);
+                var num2 = aleatorio(0, 29);
+            } while (tablero[num][num2] != 1);
+
+            if (tablero[num + 1][num2] == "F" && tablero[num - 1][num2] == "F" && tablero[num][num2 + 1] == "F" && tablero[num][num2 - 1] == "F") {
+                jAleatori();
+            } else {
+                tablero[num][num2] = "@";
+                var num3 = aleatorio(1, 4);
+                jugador[0] = num;
+                jugador[1] = num2;
+                jugador[2] = num3;
+                //jugador[i][3] = num4;
+            }
+        }
+
+
+       function fDireccion() {
+
+            for (var i = 0; i < fantasmas.length; i++) {
+
+                do {
+                    var fora = 0;
+                    var direccio = aleatorio(1, 4);
+                    switch (direccio) {
+                        case 1:
+                            if (tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] == 0) {
+                                fora = 0;
+                            } else {
+                                fantasmas[i][2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+                        case 2:
+                            if (tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] == 0) {
+                                fora = 0;
+                            } else {
+                                fantasmas[i][2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+                        case 3:
+                            if (tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] == 0) {
+                                fora = 0;
+                            } else {
+                                fantasmas[i][2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+                        case 4:
+                            if (tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] == 0) {
+                                fora = 0;
+                            } else {
+                                fantasmas[i][2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+
+                    }
+                } while (fora === 0);
+
+            }
+        }
+ 
+        // adalt = 1
+        // abaix = 2
+        // esquerra = 3
+        // dreta = 4
+
+        fAleatori();
+        jAleatori();
+        fDireccion();
         consola();
-        aleatori();
+        imprimir();
+        //setInterval(imprimir,1000);
     </script>
 </html>
