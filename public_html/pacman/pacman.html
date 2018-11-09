@@ -138,9 +138,7 @@ and open the template in the editor.
 
 
        function fDireccion() {
-
             for (var i = 0; i < fantasmas.length; i++) {
-
                 do {
                     var fora = 0;
                     var direccio = aleatorio(1, 4);
@@ -177,11 +175,51 @@ and open the template in the editor.
                                 fora = 1;
                             }
                             break;
+                    }
+                } while (fora === 0);
+            }
+        }
+        
+        function jDireccion() {
+                do {
+                    var fora = 0;
+                    var direccio = aleatorio(1, 4);
+                    switch (direccio) {
+                        case 1:
+                            if (tablero[(jugador[0]) - 1][jugador[1]] == 0) {
+                                fora = 0;
+                            } else {
+                                jugador[2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+                        case 2:
+                            if (tablero[(jugador[0]) + 1][jugador[1]] == 0) {
+                                fora = 0;
+                            } else {
+                                jugador[2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+                        case 3:
+                            if (tablero[jugador[0]][(jugador[1]) - 1] == 0) {
+                                fora = 0;
+                            } else {
+                                jugador[2] = direccio;
+                                fora = 1;
+                            }
+                            break;
+                        case 4:
+                            if (tablero[jugador[0]][(jugador[1]) + 1] == 0) {
+                                fora = 0;
+                            } else {
+                                jugador[2] = direccio;
+                                fora = 1;
+                            }
+                            break;
 
                     }
                 } while (fora === 0);
-
-            }
         }
  
         // adalt = 1
@@ -192,6 +230,7 @@ and open the template in the editor.
         fAleatori();
         jAleatori();
         fDireccion();
+        jDireccion();
         consola();
         imprimir();
         //setInterval(imprimir,1000);
