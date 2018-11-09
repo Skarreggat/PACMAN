@@ -124,7 +124,7 @@ and open the template in the editor.
                 var num2 = aleatorio(0, 29);
             } while (tablero[num][num2] != 1);
 
-            if (tablero[num + 1][num2] == "F" && tablero[num - 1][num2] == "F" && tablero[num][num2 + 1] == "F" && tablero[num][num2 - 1] == "F") {
+            if (tablero[num + 1][num2] == "F" || tablero[num - 1][num2] == "F" || tablero[num][num2 + 1] == "F" || tablero[num][num2 - 1] == "F") {
                 jAleatori();
             } else {
                 tablero[num][num2] = "@";
@@ -135,93 +135,218 @@ and open the template in the editor.
                 //jugador[i][3] = num4;
             }
         }
+        // busca una direccion posible a UN fantasma
+        function fRedireccion(i) {
+            do {
+                var fora = 0;
+                var direccio = aleatorio(1, 4);
+                switch (direccio) {
+                    case 1:
+                        if (tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] === 0) {
+                            fora = 0;
+                        } else {
+                            fantasmas[i][2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                    case 2:
+                        if (tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] === 0) {
+                            fora = 0;
+                        } else {
+                            fantasmas[i][2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                    case 3:
+                        if (tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] === 0) {
+                            fora = 0;
+                        } else {
+                            fantasmas[i][2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                    case 4:
+                        if (tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] === 0) {
+                            fora = 0;
+                        } else {
+                            fantasmas[i][2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                }
+            } while (fora === 0);
+        }
 
-
-       function fDireccion() {
+        // Hace que busque una direccion de UN fantasma para los 3 fantasmas
+        function fDireccion() {
             for (var i = 0; i < fantasmas.length; i++) {
-                do {
-                    var fora = 0;
-                    var direccio = aleatorio(1, 4);
-                    switch (direccio) {
-                        case 1:
-                            if (tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] == 0) {
-                                fora = 0;
-                            } else {
-                                fantasmas[i][2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                        case 2:
-                            if (tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] == 0) {
-                                fora = 0;
-                            } else {
-                                fantasmas[i][2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                        case 3:
-                            if (tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] == 0) {
-                                fora = 0;
-                            } else {
-                                fantasmas[i][2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                        case 4:
-                            if (tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] == 0) {
-                                fora = 0;
-                            } else {
-                                fantasmas[i][2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                    }
-                } while (fora === 0);
+                fRedireccion(i);
             }
         }
-        
+        //Busca direccion valida para el jugador
         function jDireccion() {
-                do {
-                    var fora = 0;
-                    var direccio = aleatorio(1, 4);
-                    switch (direccio) {
-                        case 1:
-                            if (tablero[(jugador[0]) - 1][jugador[1]] == 0) {
-                                fora = 0;
-                            } else {
-                                jugador[2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                        case 2:
-                            if (tablero[(jugador[0]) + 1][jugador[1]] == 0) {
-                                fora = 0;
-                            } else {
-                                jugador[2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                        case 3:
-                            if (tablero[jugador[0]][(jugador[1]) - 1] == 0) {
-                                fora = 0;
-                            } else {
-                                jugador[2] = direccio;
-                                fora = 1;
-                            }
-                            break;
-                        case 4:
-                            if (tablero[jugador[0]][(jugador[1]) + 1] == 0) {
-                                fora = 0;
-                            } else {
-                                jugador[2] = direccio;
-                                fora = 1;
-                            }
-                            break;
+            do {
+                var fora = 0;
+                var direccio = aleatorio(1, 4);
+                switch (direccio) {
+                    case 1:
+                        if (tablero[(jugador[0]) - 1][jugador[1]] === 0) {
+                            fora = 0;
+                        } else {
+                            jugador[2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                    case 2:
+                        if (tablero[(jugador[0]) + 1][jugador[1]] === 0) {
+                            fora = 0;
+                        } else {
+                            jugador[2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                    case 3:
+                        if (tablero[jugador[0]][(jugador[1]) - 1] === 0) {
+                            fora = 0;
+                        } else {
+                            jugador[2] = direccio;
+                            fora = 1;
+                        }
+                        break;
+                    case 4:
+                        if (tablero[jugador[0]][(jugador[1]) + 1] === 0) {
+                            fora = 0;
+                        } else {
+                            jugador[2] = direccio;
+                            fora = 1;
+                        }
+                        break;
 
-                    }
-                } while (fora === 0);
+                }
+            } while (fora === 0);
         }
- 
+        //comprueba el movimiento de los fantasmas, si tiene 3 o 4 posibles caminos, llama a la funcion
+        // que busca un num aleatori.
+        function fComprobarMov() {
+            for (var i = 0; i < fantasmas.length; i++) {
+
+                var camino = 0;
+
+                if (tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] === 1) {
+                    camino++;
+                }
+                if (tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] === 1) {
+                    camino++;
+                }
+                if (tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] === 1) {
+                    camino++;
+                }
+                if (tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] === 1) {
+                    camino++;
+                }
+                if (camino >= 3) {
+                    fRedireccion(i);
+                }
+                comprovar(i);
+            }
+        }
+
+        function comprovar(i) {
+
+            var direccio = fantasmas[i][2];
+            switch (direccio) {
+                case 1:
+                    if (tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] === 0) {
+                        fRedireccion(i);
+                    }
+                    break;
+                case 2:
+                    if (tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] === 0) {
+                        fRedireccion(i);
+                    }
+                    break;
+                case 3:
+                    if (tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] === 0) {
+                        fRedireccion(i);
+                    }
+                    break;
+                case 4:
+                    if (tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] === 0) {
+                        fRedireccion(i);
+                    }
+                    break;
+            }
+
+        }
+
+        /*function fMover() {
+         
+         for (var i = 0; i < fantasmas.length; i++) {
+         if (fantasmas[i][2] === 1) {
+         tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] = "F";
+         tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
+         fantasmas[i][0] = (fantasmas[i][0]) - 1;
+         }
+         else if (fantasmas[i][2] === 2) {
+         tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] = "F";
+         tablero[fantasmas[i][0]][fantasmas[i][1]] = 1;
+         fantasmas[i][0] = (fantasmas[i][0]) + 1;
+         }
+         else if (fantasmas[i][2] === 3) {
+         tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] = "F";
+         tablero[fantasmas[i][0]][fantasmas[i][1]] = 1;
+         fantasmas[i][1] = (fantasmas[i][0]) - 1;
+         }
+         else if (fantasmas[i][2] === 4) {
+         tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] = "F";
+         tablero[fantasmas[i][0]][fantasmas[i][1]] = 1;
+         fantasmas[i][1] = (fantasmas[i][0]) + 1;
+         }
+         
+         }
+         fComprobarMov();
+         }*/
+
+        function fMover() {
+            for (var i = 0; i < fantasmas.length; i++) {
+
+                var dir = fantasmas[i][2];
+                switch (dir) {
+                    case 1:
+                        tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] = 'F';
+                        tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
+
+                        fantasmas[i][0] = (fantasmas[i][0]) - 1;
+
+
+                        break;
+                    case 2:
+                        tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] = 'F';
+                        tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
+
+                        fantasmas[i][0] = (fantasmas[i][0]) + 1;
+
+                        break;
+                    case 3:
+                        tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] = 'F';
+                        tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
+
+                        fantasmas[i][1] = (fantasmas[i][1]) - 1;
+
+                        break;
+                    case 4:
+                        tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] = 'F';
+                        tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
+
+                        fantasmas[i][1] = (fantasmas[i][1]) + 1;
+
+                        break;
+                }
+
+            }
+            fComprobarMov();
+        }
+
         // adalt = 1
         // abaix = 2
         // esquerra = 3
@@ -231,8 +356,13 @@ and open the template in the editor.
         jAleatori();
         fDireccion();
         jDireccion();
-        consola();
         imprimir();
-        //setInterval(imprimir,1000);
+        consola();
+
+        setInterval(function () {
+            fMover();
+            imprimir();
+        }, 50);
+        // clearInterval(a);
     </script>
 </html>
