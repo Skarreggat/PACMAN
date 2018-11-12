@@ -250,7 +250,7 @@ and open the template in the editor.
                 comprovar(i);
             }
         }
-
+        //comprueba que donde vaya a ir no sea una pared
         function comprovar(i) {
 
             var direccio = fantasmas[i][2];
@@ -278,35 +278,7 @@ and open the template in the editor.
             }
 
         }
-
-        /*function fMover() {
-         
-         for (var i = 0; i < fantasmas.length; i++) {
-         if (fantasmas[i][2] === 1) {
-         tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] = "F";
-         tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
-         fantasmas[i][0] = (fantasmas[i][0]) - 1;
-         }
-         else if (fantasmas[i][2] === 2) {
-         tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] = "F";
-         tablero[fantasmas[i][0]][fantasmas[i][1]] = 1;
-         fantasmas[i][0] = (fantasmas[i][0]) + 1;
-         }
-         else if (fantasmas[i][2] === 3) {
-         tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] = "F";
-         tablero[fantasmas[i][0]][fantasmas[i][1]] = 1;
-         fantasmas[i][1] = (fantasmas[i][0]) - 1;
-         }
-         else if (fantasmas[i][2] === 4) {
-         tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] = "F";
-         tablero[fantasmas[i][0]][fantasmas[i][1]] = 1;
-         fantasmas[i][1] = (fantasmas[i][0]) + 1;
-         }
-         
-         }
-         fComprobarMov();
-         }*/
-
+        //mueve los fantasmas en direccion valida
         function fMover() {
             for (var i = 0; i < fantasmas.length; i++) {
 
@@ -315,36 +287,60 @@ and open the template in the editor.
                     case 1:
                         tablero[(fantasmas[i][0]) - 1][fantasmas[i][1]] = 'F';
                         tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
-
                         fantasmas[i][0] = (fantasmas[i][0]) - 1;
-
-
                         break;
                     case 2:
                         tablero[(fantasmas[i][0]) + 1][fantasmas[i][1]] = 'F';
                         tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
-
                         fantasmas[i][0] = (fantasmas[i][0]) + 1;
-
                         break;
                     case 3:
                         tablero[fantasmas[i][0]][(fantasmas[i][1]) - 1] = 'F';
                         tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
-
                         fantasmas[i][1] = (fantasmas[i][1]) - 1;
-
                         break;
                     case 4:
                         tablero[fantasmas[i][0]][(fantasmas[i][1]) + 1] = 'F';
                         tablero[(fantasmas[i][0])][fantasmas[i][1]] = 1;
-
                         fantasmas[i][1] = (fantasmas[i][1]) + 1;
-
                         break;
                 }
-
             }
             fComprobarMov();
+        }
+        //mueve el jugador solo al inicio de la partida en direccion valida
+        function jMover() {
+            var dir2 = jugador[2];
+            switch (dir2) {
+                case 1:
+                    if(tablero[jugador[0] -1][jugador[1]] === 1){
+                        tablero[(jugador[0]) - 1][jugador[1]] = '@';
+                        tablero[(jugador[0])][jugador[1]] = 1;
+                        jugador[0] = (jugador[0]) - 1;
+                    }
+                    break;
+                case 2:
+                    if(tablero[jugador[0] + 1][jugador[1]] === 1){
+                        tablero[(jugador[0]) + 1][jugador[1]] = '@';
+                        tablero[(jugador[0])][jugador[1]] = 1;
+                        jugador[0] = (jugador[0]) + 1;
+                    }
+                    break;
+                case 3:
+                    if(tablero[jugador[0]][jugador[1] - 1] === 1){
+                        tablero[jugador[0]][(jugador[1]) - 1] = '@';
+                        tablero[(jugador[0])][jugador[1]] = 1;
+                        jugador[1] = (jugador[1]) - 1;
+                    }
+                    break;
+                case 4:
+                    if(tablero[jugador[0]][jugador[1] + 1] === 1){
+                        tablero[jugador[0]][(jugador[1]) + 1] = '@';
+                        tablero[(jugador[0])][jugador[1]] = 1;
+                        jugador[1] = (jugador[1]) + 1;
+                    }
+                    break;
+            }
         }
 
         // adalt = 1
@@ -358,11 +354,12 @@ and open the template in the editor.
         jDireccion();
         imprimir();
         consola();
-
+        
         setInterval(function () {
             fMover();
+            jMover();
             imprimir();
-        }, 50);
+        }, 500);
         // clearInterval(a);
     </script>
 </html>
