@@ -342,6 +342,7 @@ and open the template in the editor.
                     }
                     break;
             }
+            
         }
         //si el fantasma està a la mateixa posicio que el jugador FIN
         function xocar() {
@@ -371,141 +372,26 @@ and open the template in the editor.
             switch (teclado) {
                 case 1:
                     if (tablero[jugador[0] - 1][jugador[1]] === 1) {
-                        tablero[(jugador[0]) - 1][jugador[1]] = '@';
-                        tablero[(jugador[0])][jugador[1]] = 1;
-                        jugador[0] = (jugador[0]) - 1;
-                        jugador[2] = 1;
-                    } else {
-                        if (jugador[2] === 1) {
-                            if (tablero[jugador[0] - 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) - 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) - 1;
-                            }
-                        } else if (jugador[2] === 2) {
-                            if (tablero[jugador[0] + 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) + 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) + 1;
-                            }
-                        } else if (jugador[2] === 3) {
-                            if (tablero[jugador[0]][jugador[1] - 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) - 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) - 1;
-                            }
-                        } else if (jugador[2] === 4) {
-                            if (tablero[jugador[0]][jugador[1] + 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) + 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) + 1;
-                            }
-                        }
+                        jugador[2] = jugador[3];
                     }
                 break;
                 case 2:
                     if (tablero[jugador[0] + 1][jugador[1]] === 1) {
-                        tablero[(jugador[0]) + 1][jugador[1]] = '@';
-                        tablero[(jugador[0])][jugador[1]] = 1;
-                        jugador[0] = (jugador[0]) + 1;
-                        jugador[2] = 2;
-                    } else {
-                        if (jugador[2] === 1) {
-                            if (tablero[jugador[0] - 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) - 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) - 1;
-                            }
-                        } else if (jugador[2] === 2) {
-                            if (tablero[jugador[0] + 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) + 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) + 1;
-                            }
-                        } else if (jugador[2] === 3) {
-                            if (tablero[jugador[0]][jugador[1] - 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) - 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) - 1;
-                            }
-                        } else if (jugador[2] === 4) {
-                            if (tablero[jugador[0]][jugador[1] + 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) + 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) + 1;
-                            }
-                        }
+                        jugador[2] = jugador[3];
                     }
                 break;
                 case 3:
                     if (tablero[jugador[0]][jugador[1] -1] === 1) {
-                        tablero[jugador[0]][jugador[1] - 1] = '@';
-                        tablero[(jugador[0])][jugador[1]] = 1;
-                        jugador[1] = (jugador[1]) - 1;
-                        jugador[2] = 3;
-                    } else {
-                        if (jugador[2] === 1) {
-                            if (tablero[jugador[0] - 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) - 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) - 1;
-                            }
-                        } else if (jugador[2] === 2) {
-                            if (tablero[jugador[0] + 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) + 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) + 1;
-                            }
-                        } else if (jugador[2] === 3) {
-                            if (tablero[jugador[0]][jugador[1] - 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) - 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) - 1;
-                            }
-                        } else if (jugador[2] === 4) {
-                            if (tablero[jugador[0]][jugador[1] + 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) + 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) + 1;
-                            }
-                        }
+                        jugador[2] = jugador[3];
                     }
                 break;
                 case 4:
                     if (tablero[jugador[0]][jugador[1] + 1] === 1) {
-                        tablero[jugador[0]][jugador[1] + 1] = '@';
-                        tablero[(jugador[0])][jugador[1]] = 1;
-                        jugador[1] = (jugador[1]) + 1;
-                        jugador[2] = 4;
-                    } else {
-                        if (jugador[2] === 1) {
-                            if (tablero[jugador[0] - 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) - 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) - 1;
-                            }
-                        } else if (jugador[2] === 2) {
-                            if (tablero[jugador[0] + 1][jugador[1]] === 1) {
-                                tablero[(jugador[0]) + 1][jugador[1]] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[0] = (jugador[0]) + 1;
-                            }
-                        } else if (jugador[2] === 3) {
-                            if (tablero[jugador[0]][jugador[1] - 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) - 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) - 1;
-                            }
-                        } else if (jugador[2] === 4) {
-                            if (tablero[jugador[0]][jugador[1] + 1] === 1) {
-                                tablero[jugador[0]][(jugador[1]) + 1] = '@';
-                                tablero[(jugador[0])][jugador[1]] = 1;
-                                jugador[1] = (jugador[1]) + 1;
-                            }
-                        }
+                        jugador[2] = jugador[3];
                     }
                 break;
             }
+            jMover();
         }
 
 
@@ -520,11 +406,10 @@ and open the template in the editor.
         jDireccion();
         imprimir();
         consola();
-
+        
         var a = setInterval(function () {
-            xocar();
             fMover();
-            jMover();
+            xocar();
             jMoverTeclado();
             imprimir();
         }
