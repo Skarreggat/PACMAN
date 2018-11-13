@@ -12,8 +12,13 @@ and open the template in the editor.
 
     </head>
     <body id="all">
+        <br>
+        <div id="puntuacio" style="border-style: double; border-color: red; padding: 0.5rem; border-width: 0.5rem;
+             width: 100px; margin-left: 160px;">Puntuació: 0</div>
+        <br>
         <div id="pacman" style="font-family: Courier New; font-size: 25px; font-weight: bold; line-height: 1px;"></div>
-        <div id="pervic" style="margin-left: 50%; margin-top: -25%; font-size: 25px;"></div>
+        <div id="pervic" style="margin-left: 50%; margin-top: -25%; font-size: 45px; color: blue; 
+             "></div>
     </body>
     <script>
 
@@ -341,14 +346,16 @@ and open the template in the editor.
                     }
                     break;
             }
-            
+
         }
         //si el fantasma està a la mateixa posicio que el jugador FIN
         function xocar() {
             for (var i = 0; i < fantasmas.length; i++) {
                 if (fantasmas[i][0] === jugador[0] && fantasmas[i][1] === jugador[1]) {
                     clearInterval(a);
-                    document.getElementById("pervic").innerHTML = "HAS PERDUT!!";
+                    clearInterval(cronometro);
+                    document.getElementById("pervic").innerHTML = 
+                            "<span style='border-style: dashed; width: 300px; padding: 0.5rem;'>Game Over!!</span>";
                 }
             }
         }
@@ -373,22 +380,22 @@ and open the template in the editor.
                     if (tablero[jugador[0] - 1][jugador[1]] === 1) {
                         jugador[2] = jugador[3];
                     }
-                break;
+                    break;
                 case 2:
                     if (tablero[jugador[0] + 1][jugador[1]] === 1) {
                         jugador[2] = jugador[3];
                     }
-                break;
+                    break;
                 case 3:
-                    if (tablero[jugador[0]][jugador[1] -1] === 1) {
+                    if (tablero[jugador[0]][jugador[1] - 1] === 1) {
                         jugador[2] = jugador[3];
                     }
-                break;
+                    break;
                 case 4:
                     if (tablero[jugador[0]][jugador[1] + 1] === 1) {
                         jugador[2] = jugador[3];
                     }
-                break;
+                    break;
             }
             jMover();
         }
@@ -405,15 +412,29 @@ and open the template in the editor.
         jDireccion();
         imprimir();
         consola();
-        
+
+        contador_s = 0;
+        cronometro = setInterval(function () {
+            contador_s++;
+            document.getElementById("puntuacio").innerHTML = "Puntuació: " + contador_s;
+            if (contador_s == 300) {
+                clearInterval(cronometro);
+            }
+
+        }
+        , 1000);
+
         var a = setInterval(function () {
+            if (contador_s == 300) {
+                clearInterval(a);
+                document.getElementById("pervic").innerHTML = 
+                        "<span style='border-style: dashed; width: 300px; padding: 0.5rem;'>Victory!!</span>";
+            }
             fMover();
             xocar();
             jMoverTeclado();
             imprimir();
         }
         , 100);
-
-        // clearInterval(a);
     </script>
 </html>
