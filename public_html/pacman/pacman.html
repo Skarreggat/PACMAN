@@ -12,7 +12,7 @@ and open the template in the editor.
 
     </head>
     <body id="all">
-        <div id="pacman" style="font-family: Courier New; font-size: 25px; font-weight: bold; line-height: 17px;"></div>
+        <div id="pacman" style="font-family: Courier New; font-size: 25px; font-weight: bold; line-height: 1px;"></div>
         <div id="pervic" style="margin-left: 50%; margin-top: -25%; font-size: 25px;"></div>
     </body>
     <script>
@@ -72,18 +72,17 @@ and open the template in the editor.
 
         function imprimir() {
             var fila = "";
-
             for (var x = 0; x < tablero.length; x++) {
                 fila += "<br>";
                 for (var y = 0; y < tablero[x].length; y++) {
                     if (tablero[x][y] === 0) {
-                        fila += "X";
+                        fila += "<img src='cuadrado-azul.png' height='15px' width='15px'>";
                     } else if (tablero[x][y] === 1) {
-                        fila += "&nbsp;";
+                        fila += "&nbsp";
                     } else if (tablero[x][y] === "F") {
-                        fila += "<span style='color:red;'>F</span>";
+                        fila += "<img src='fantasma.jpg' height='15px' width='15px'>";
                     } else {
-                        fila += "<span style='color:darkblue;'>@</span>";
+                        fila += "<img src='pacman.png' height='15px' width='15px'>";
                     }
                 }
             }
@@ -413,7 +412,7 @@ and open the template in the editor.
             jMoverTeclado();
             imprimir();
         }
-        , 1000);
+        , 100);
 
         // clearInterval(a);
     </script>
