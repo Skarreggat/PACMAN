@@ -21,7 +21,7 @@ and open the template in the editor.
              "></div>
     </body>
     <script>
-
+        // creacion del tablero
         var tablero = new Array(30);
 
         tablero[00] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -54,7 +54,7 @@ and open the template in the editor.
         tablero[27] = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0];
         tablero[28] = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0];
         tablero[29] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
+        // la funcion consola mostraria el tablero en el console.log
         function consola() {
             var fila = "";
 
@@ -74,7 +74,8 @@ and open the template in the editor.
             }
             console.log(fila);
         }
-
+        //la funcion imprimir muestra el tablero en la propia "web", añadiendo imagenes a las paredes,
+        //fantasmas y jugador.
         function imprimir() {
             var fila = "";
             for (var x = 0; x < tablero.length; x++) {
@@ -93,14 +94,13 @@ and open the template in the editor.
             }
             document.getElementById("pacman").innerHTML = fila;
         }
+        
+        //funcion que usaremos siempre que queramos sacar un número aleatorio.
         function aleatorio(min, max) {
             return Math.floor(Math.random() * ((max + 1) - min) + min);
         }
-
-        //variables para el jugador
-        /*var datosJug = ["X", "Y", "Direc", "anarDirec"];
-         var jug = [datosJug];*/
-
+        
+        //creacion de arrays de fantasmas y jugador
         var jugador = new Array(4);
 
         var fantasmas = new Array(3);
@@ -108,7 +108,7 @@ and open the template in the editor.
             fantasmas[i] = new Array(3);
         }
 
-        //ubicacion random fantasmas y jugador
+        //ubicacion aleatorio fantasmas y jugador
 
         function fAleatori() {
 
@@ -359,6 +359,8 @@ and open the template in the editor.
                 }
             }
         }
+        
+        //funcion que recoje las teclas pulsadas y les pone el valor a la posicion adecuada del jugador
         function notificaObservador(e) {
             if (e.code == "ArrowRight") {
                 jugador[3] = 4;
@@ -372,7 +374,9 @@ and open the template in the editor.
         }
         var element = document.getElementById("all");
         element.addEventListener("keydown", notificaObservador);
-
+        
+        
+        //funcion que hace mover al jugador con las teclas pulsadas
         function jMoverTeclado() {
             var teclado = jugador[3];
             switch (teclado) {
@@ -405,14 +409,15 @@ and open the template in the editor.
         // abaix = 2
         // esquerra = 3
         // dreta = 4
-
+        //llamadas a las fuciones iniciales
         fAleatori();
         jAleatori();
         fDireccion();
         jDireccion();
         imprimir();
         consola();
-
+        
+        //funcion interval para generar un cronometro a modo de puntuacion, i llega a 300(5 min) termina y ganas
         contador_s = 0;
         cronometro = setInterval(function () {
             contador_s++;
@@ -423,7 +428,7 @@ and open the template in the editor.
 
         }
         , 1000);
-
+        //funcion que permite que las funciones introducidas se ejecuten dependiendo del tiempo marcado.
         var a = setInterval(function () {
             if (contador_s == 300) {
                 clearInterval(a);
